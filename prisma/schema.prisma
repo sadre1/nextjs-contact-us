@@ -12,9 +12,9 @@ datasource db {
 
 model Contact {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    fullname    String
-    email       String?  @unique
-    phonenumber String
-    message     String
+    fullname    String?
+    email       String   @unique
+    phonenumber String?
+    message     String?
     createdAt   DateTime @default(now())
 }
