@@ -1,18 +1,20 @@
-// // This is your Prisma schema file,
-// // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// generator client {
-//   provider = "prisma-client-js"
-// }
+generator client {
+    provider = "prisma-client-js"
+}
 
-// datasource db {
-//   provider = "mongodb"
-//   url      = env("DATABASE_URL")
-// }
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
 
-// model Contact {
-//   id        String @id @default(auto()) @map("_id") @db.ObjectId
-//   firstname String
-//   email     String
-//   message   String
-// }
+model Contact {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    fullname    String
+    email       String?  @unique
+    phonenumber String
+    message     String
+    createdAt   DateTime @default(now())
+}
