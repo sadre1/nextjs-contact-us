@@ -1,4 +1,5 @@
 "use client";
+import { createUser } from "@/lib/prisma/contacts";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -8,9 +9,35 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-  const onSubmit = (data) => {
-    alert("Form Submitted Successfully");
-    console.log(data);
+  const onSubmit = async (data) => {
+    const formData = {
+      fullname: data.fullname,
+      email: data.email,
+      phonenumber: data.phonenumber,
+      message: data.message,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any other headers as needed
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+      alert("Form Submitted Successfully");
+    } catch (error) {
+      console.error("Error submitting form:", error.message);
+      alert("Error submitting form. Please try again.");
+    }
   };
   return (
     <>
