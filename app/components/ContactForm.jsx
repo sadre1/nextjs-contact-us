@@ -8,7 +8,7 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const formData = {
       fullname: data.fullname,
       email: data.email,
